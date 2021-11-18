@@ -14,6 +14,7 @@ namespace SistemaContable
 {
     public partial class MenuPrincipal : Form
     {
+        private Controlador controlador;
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -44,9 +45,23 @@ namespace SistemaContable
                 MessageBox.Show(ex.Message);
             }*/
         }
-        private void MenuPrincipal_Load(object sender, EventArgs e)
-        {
+        private void MenuPrincipal_Load(object sender, EventArgs e){}
 
+        private void botonAjustes_Click(object sender, EventArgs e)
+        {
+            try { 
+                AjustesMenu vistaAJ = new AjustesMenu(this,controlador);
+                vistaAJ.Visible = true;
+                this.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public void setControlador(Controlador controlador)
+        {
+            this.controlador = controlador;
         }
     }
 }

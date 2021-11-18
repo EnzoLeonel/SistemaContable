@@ -46,13 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controlador.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vistas\LibroDiario.cs">
+    <Compile Include="Vistas\AjustesMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\LibroDiario.Designer.cs">
-      <DependentUpon>LibroDiario.cs</DependentUpon>
+    <Compile Include="Vistas\AjustesMenu.Designer.cs">
+      <DependentUpon>AjustesMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\MenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -69,6 +70,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vistas\AjustesMenu.resx">
+      <DependentUpon>AjustesMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
