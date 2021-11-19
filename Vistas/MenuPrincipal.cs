@@ -22,15 +22,7 @@ namespace SistemaContable
 
         private void BotonLibroDiario_Click(object sender, EventArgs e)
         {
-            try { 
-               // LibroDiario vistaLB = new LibroDiario(this);
-                //vistaLB.Visible = true;
-                //this.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            controlador.nuevoLibroDiario();
         }
 
         private void botonLibroMayor_Click(object sender, EventArgs e)
