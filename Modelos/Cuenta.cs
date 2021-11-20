@@ -19,7 +19,7 @@ namespace SistemaContable.Modelos
         internal TipodeCuenta Tipocuenta { get => tipocuenta; set => tipocuenta = value; }
         public Cuenta() { }
 
-        public List<Cuenta> ListarCuentas(int idtipocuenta)
+        public static List<Cuenta> ListarCuentas(int idtipocuenta)
         {
             List<Cuenta> listadecuentas = new List<Cuenta>();
             string query = "SELECT * FROM cuentas c, tipocuenta t WHERE(c.tipocuenta_id = t.id_tipocuenta AND t.id_tipocuenta = " + idtipocuenta + ")";

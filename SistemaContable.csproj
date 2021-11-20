@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Controlador.cs" />
     <Compile Include="Modelos\Asiento.cs" />
+    <Compile Include="Modelos\ComboBoxItem.cs" />
     <Compile Include="Modelos\Cuenta.cs" />
     <Compile Include="Modelos\Movimiento.cs" />
     <Compile Include="Modelos\TipodeCuenta.cs" />
@@ -61,6 +62,12 @@
     <Compile Include="Vistas\AjustesMenu.Designer.cs">
       <DependentUpon>AjustesMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\EliminarAsientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\EliminarAsientos.Designer.cs">
+      <DependentUpon>EliminarAsientos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\LibroDiario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +79,12 @@
     </Compile>
     <Compile Include="Vistas\MenuPrincipal.Designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\NuevoAsiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\NuevoAsiento.Designer.cs">
+      <DependentUpon>NuevoAsiento.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -90,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\NuevoAsiento.resx">
+      <DependentUpon>NuevoAsiento.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

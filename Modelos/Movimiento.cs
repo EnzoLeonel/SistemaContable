@@ -70,6 +70,56 @@ namespace SistemaContable.Modelos
                 return listademovimientos.First();
             }
         }
+        
+        public static List<Movimiento> ListarMovimientos(int idasiento)
+        {
+            List<Movimiento> listademovimientos = new List<Movimiento>();
+            string query = "SELECT * FROM movimiento m, asiento a, cuentas c, tipocuenta t WHERE (m.asiento_id = a.id_asiento AND m.cuenta_id = c.id_cuenta AND t.id_tipocuenta = c.tipocuenta_id AND m.asiento_id = " + idasiento + ")";
+
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Movimiento movimiento = new Movimiento();
+                        Asiento asiento = new Asiento();
+                        Cuenta cuenta = new Cuenta();
+                        asiento.Id = reader.GetInt32(1);
+                        asiento.Numero_asiento = reader.GetInt32(6);
+                        asiento.Fecha_asiento = reader.GetString(7);
+                        asiento.Descripcion_asiento = reader.GetString(8);
+                        cuenta.IdCuenta = reader.GetInt32(9);
+                        cuenta.NombreCuenta = reader.GetString(10);
+                        cuenta.Tipocuenta = new TipodeCuenta();
+                        cuenta.Tipocuenta.Id = reader.GetInt32(11);
+                        cuenta.Tipocuenta.DescripcionTipo = reader.GetString(13);
+                        movimiento.Asiento = asiento;
+                        movimiento.Cuenta = cuenta;
+                        movimiento.Id = reader.GetInt32(0);
+                        movimiento.Valor = reader.GetFloat(3);
+                        movimiento.Debe_haber = reader.GetBoolean(4);
+                        listademovimientos.Add(movimiento);
+                    }
+                }
+
+                databaseConnection.Close();
+                return listademovimientos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return listademovimientos;
+            }
+        }
         public void CrearMovimiento(Movimiento mov)
         {
             string query = "INSERT INTO movimiento(asiento_id,cuenta_id,valor,debeohaber) VALUES(" + mov.Asiento.Id + ", " + mov.Cuenta.IdCuenta + ", " + mov.Valor + ", " + mov.Debe_haber + ")";

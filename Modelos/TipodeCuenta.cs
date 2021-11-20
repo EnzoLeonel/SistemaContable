@@ -23,7 +23,7 @@ namespace SistemaContable.Modelos
         }
         public TipodeCuenta(){}
 
-        public List<TipodeCuenta> TraerTipos()
+        public static List<TipodeCuenta> TraerTipos()
         {
             List<TipodeCuenta> listadetipos = new List<TipodeCuenta>();
             string query = "SELECT * FROM tipocuenta";

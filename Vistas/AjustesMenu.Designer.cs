@@ -125,6 +125,7 @@ namespace SistemaContable.Vistas
             this.boxContrasena.Name = "boxContrasena";
             this.boxContrasena.Size = new System.Drawing.Size(125, 24);
             this.boxContrasena.TabIndex = 8;
+            this.boxContrasena.UseSystemPasswordChar = true;
             // 
             // AjustesMenu
             // 

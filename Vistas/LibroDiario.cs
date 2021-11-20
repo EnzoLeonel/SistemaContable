@@ -35,5 +35,9 @@ namespace SistemaContable.Vistas
             controlador.refrescarDataGrip(fecha);
 
         }
+        private void BotonNuevo_Click(object sender, EventArgs e)
+        {
+            controlador.nuevaVistaCrearAsiento();
+        }
     }
 }
