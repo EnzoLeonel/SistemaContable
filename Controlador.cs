@@ -11,24 +11,17 @@ namespace SistemaContable
 {
     public class Controlador
     {
-        private string conexionDB = "datasource=127.0.0.1;port=3306;username=root;password=;database=librodiario;";
         private MenuPrincipal vistaMenuP;
         private LibroDiario vistaLD;
-        private Asiento asiento;
         public Controlador() { }
         public Controlador(MenuPrincipal vistaMenuP /*,Modelo modelo*/)
         {
             this.vistaMenuP = vistaMenuP;
             //this.modelo = modelo;
         }
-        public void setConexionDB(string conexionDB)
-        {
-            this.conexionDB = conexionDB;
-        }
         public void nuevoLibroDiario()
         {
-            asiento = new Asiento(conexionDB);
-            if (asiento.hayConexion())
+            if (SQLConexion.Conexion.hayConexion())
             {
                 string fecha = DateTime.Now.ToString("yyyy-MM-dd");
                 
@@ -43,6 +36,7 @@ namespace SistemaContable
         }
         public void refrescarDataGrip(string fecha)
         {
+            Asiento asiento = new Asiento();
             List<Asiento> asientos = asiento.ListarAsientosporFecha(fecha);
             vistaLD.dataGridAsientos.Rows.Clear();
             foreach (Asiento item in asientos)

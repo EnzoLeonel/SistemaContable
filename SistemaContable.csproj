@@ -54,6 +54,7 @@
     <Compile Include="Modelos\TipodeCuenta.cs" />
     <Compile Include="MVC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLConexion.cs" />
     <Compile Include="Vistas\AjustesMenu.cs">
       <SubType>Form</SubType>
     </Compile>
