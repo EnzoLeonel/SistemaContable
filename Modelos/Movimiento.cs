@@ -186,5 +186,23 @@ namespace SistemaContable.Modelos
                 MessageBox.Show(ex.Message);
             }
         }
+        public static void EliminarMovimientoAsiento(int idasiento)
+        {
+            string query = "DELETE FROM movimiento WHERE asiento_id = " + idasiento;
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

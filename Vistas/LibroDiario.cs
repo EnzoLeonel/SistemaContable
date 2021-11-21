@@ -33,11 +33,15 @@ namespace SistemaContable.Vistas
         {
             string fecha = selectorFecha.Value.ToString("yyyy-MM-dd");
             controlador.RefrescarDataGrip(fecha);
-
         }
         private void BotonNuevo_Click(object sender, EventArgs e)
         {
             controlador.NuevaVistaCrearAsiento();
+        }
+
+        private void BotonEliminar_Click(object sender, EventArgs e)
+        {
+            controlador.NuevaVistaEliminarAsiento();
         }
     }
 }

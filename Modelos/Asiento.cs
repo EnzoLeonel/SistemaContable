@@ -20,7 +20,7 @@ namespace SistemaContable.Modelos
         public string Descripcion_asiento { get => descripcion_asiento; set => descripcion_asiento = value; }
         internal List<Movimiento> Asiento_movimiento { get => asiento_movimiento; set => asiento_movimiento = value; }
 
-        public List<Asiento> ListarAsientosporFecha(string fecha)
+        public static List<Asiento> ListarAsientosporFecha(string fecha)
         {
             List<Asiento> listadeasientos = new List<Asiento>();
             string query = "SELECT * FROM asiento a WHERE (a.fecha_asiento = '" + fecha + "')";
@@ -142,6 +142,27 @@ namespace SistemaContable.Modelos
             {
                 MessageBox.Show(ex.Message);
                 return 0;
+            }
+        }
+        public static void borrarAsiento(int idasiento)
+        {
+            string query = "DELETE FROM asiento WHERE id_asiento = " + idasiento;
+
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

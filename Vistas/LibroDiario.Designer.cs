@@ -30,9 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridAsientos = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnMostrarMes = new System.Windows.Forms.Button();
-            this.selectorFecha = new System.Windows.Forms.DateTimePicker();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColNAsiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,8 +38,11 @@
             this.ColDebe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColHaber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BotonEliminar = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.BotonNuevo = new System.Windows.Forms.Button();
+            this.BotonEliminar = new System.Windows.Forms.Button();
+            this.btnMostrarMes = new System.Windows.Forms.Button();
+            this.selectorFecha = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAsientos)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -75,36 +75,6 @@
             this.dataGridAsientos.Name = "dataGridAsientos";
             this.dataGridAsientos.Size = new System.Drawing.Size(826, 409);
             this.dataGridAsientos.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.BotonNuevo);
-            this.groupBox2.Controls.Add(this.BotonEliminar);
-            this.groupBox2.Controls.Add(this.btnMostrarMes);
-            this.groupBox2.Controls.Add(this.selectorFecha);
-            this.groupBox2.Location = new System.Drawing.Point(12, 4);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(826, 42);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Fecha";
-            // 
-            // btnMostrarMes
-            // 
-            this.btnMostrarMes.Location = new System.Drawing.Point(231, 19);
-            this.btnMostrarMes.Name = "btnMostrarMes";
-            this.btnMostrarMes.Size = new System.Drawing.Size(93, 23);
-            this.btnMostrarMes.TabIndex = 1;
-            this.btnMostrarMes.Text = "Mostrar mes";
-            this.btnMostrarMes.UseVisualStyleBackColor = true;
-            // 
-            // selectorFecha
-            // 
-            this.selectorFecha.Location = new System.Drawing.Point(6, 19);
-            this.selectorFecha.Name = "selectorFecha";
-            this.selectorFecha.Size = new System.Drawing.Size(218, 20);
-            this.selectorFecha.TabIndex = 0;
-            this.selectorFecha.ValueChanged += new System.EventHandler(this.selectorFecha_ValueChanged);
             // 
             // ID
             // 
@@ -157,15 +127,18 @@
             this.ColDescripcion.ReadOnly = true;
             this.ColDescripcion.Width = 400;
             // 
-            // BotonEliminar
+            // groupBox2
             // 
-            this.BotonEliminar.BackColor = System.Drawing.Color.MistyRose;
-            this.BotonEliminar.Location = new System.Drawing.Point(705, 19);
-            this.BotonEliminar.Name = "BotonEliminar";
-            this.BotonEliminar.Size = new System.Drawing.Size(115, 23);
-            this.BotonEliminar.TabIndex = 2;
-            this.BotonEliminar.Text = "Eliminar Asiento";
-            this.BotonEliminar.UseVisualStyleBackColor = false;
+            this.groupBox2.Controls.Add(this.BotonNuevo);
+            this.groupBox2.Controls.Add(this.BotonEliminar);
+            this.groupBox2.Controls.Add(this.btnMostrarMes);
+            this.groupBox2.Controls.Add(this.selectorFecha);
+            this.groupBox2.Location = new System.Drawing.Point(12, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(826, 42);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Fecha";
             // 
             // BotonNuevo
             // 
@@ -177,6 +150,34 @@
             this.BotonNuevo.Text = "Nuevo Asiento";
             this.BotonNuevo.UseVisualStyleBackColor = false;
             this.BotonNuevo.Click += new System.EventHandler(this.BotonNuevo_Click);
+            // 
+            // BotonEliminar
+            // 
+            this.BotonEliminar.BackColor = System.Drawing.Color.MistyRose;
+            this.BotonEliminar.Location = new System.Drawing.Point(705, 19);
+            this.BotonEliminar.Name = "BotonEliminar";
+            this.BotonEliminar.Size = new System.Drawing.Size(115, 23);
+            this.BotonEliminar.TabIndex = 2;
+            this.BotonEliminar.Text = "Eliminar Asiento";
+            this.BotonEliminar.UseVisualStyleBackColor = false;
+            this.BotonEliminar.Click += new System.EventHandler(this.BotonEliminar_Click);
+            // 
+            // btnMostrarMes
+            // 
+            this.btnMostrarMes.Location = new System.Drawing.Point(231, 19);
+            this.btnMostrarMes.Name = "btnMostrarMes";
+            this.btnMostrarMes.Size = new System.Drawing.Size(93, 23);
+            this.btnMostrarMes.TabIndex = 1;
+            this.btnMostrarMes.Text = "Mostrar mes";
+            this.btnMostrarMes.UseVisualStyleBackColor = true;
+            // 
+            // selectorFecha
+            // 
+            this.selectorFecha.Location = new System.Drawing.Point(6, 19);
+            this.selectorFecha.Name = "selectorFecha";
+            this.selectorFecha.Size = new System.Drawing.Size(218, 20);
+            this.selectorFecha.TabIndex = 0;
+            this.selectorFecha.ValueChanged += new System.EventHandler(this.selectorFecha_ValueChanged);
             // 
             // LibroDiario
             // 

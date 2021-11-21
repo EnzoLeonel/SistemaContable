@@ -16,6 +16,7 @@ namespace SistemaContable
         private LibroDiario vistaLD;
         private NuevoAsiento vistaNA;
         private Asiento asientoNuevo;
+        private EliminarAsiento vistaEA;
         public Controlador() { }
         public Controlador(MenuPrincipal vistaMenuP)
         {
@@ -42,7 +43,18 @@ namespace SistemaContable
             {
                 asientoNuevo = new Asiento();
                 asientoNuevo.Asiento_movimiento = new List<Movimiento>();
-                vistaNA = new NuevoAsiento(vistaLD, this);
+                vistaLD.Dispose();
+                vistaNA = new NuevoAsiento(this);
+            }
+        }
+        public void NuevaVistaEliminarAsiento()
+        {
+            if (SQLConexion.Conexion.hayConexion())
+            {
+                vistaLD.Dispose();
+                vistaEA = new EliminarAsiento(this);
+                
+                RefrescarDataGripEliminar();
             }
         }
         private string DebeHaberString(Movimiento movi, bool seleccion)
@@ -58,8 +70,7 @@ namespace SistemaContable
         }
         public void RefrescarDataGrip(string fecha)
         {
-            Asiento asiento = new Asiento();
-            List<Asiento> asientos = asiento.ListarAsientosporFecha(fecha);
+            List<Asiento> asientos = Asiento.ListarAsientosporFecha(fecha);
             vistaLD.dataGridAsientos.Rows.Clear();
             foreach (Asiento item in asientos)
             {
@@ -69,6 +80,27 @@ namespace SistemaContable
                 {
                     vistaLD.dataGridAsientos.Rows.Add(item.Id, item.Numero_asiento, "", movi.Cuenta.NombreCuenta, movi.Cuenta.Tipocuenta.DescripcionTipo ,DebeHaberString(movi, false), DebeHaberString(movi, true), "");
                 }
+            }
+        }
+        public void RefrescarDataGripEliminar()
+        {
+            string fecha = DateTime.Now.ToString("yyyy-MM-dd");
+            List<Asiento> asientos = Asiento.ListarAsientosporFecha(fecha);
+            vistaEA.dataGridEliminar.Rows.Clear();
+            foreach (Asiento item in asientos)
+            {
+                List<Movimiento> movimientos = Movimiento.ListarMovimientos(item.Id);
+                float valor = 0;
+                foreach (Movimiento movi in movimientos)
+                {
+                    valor += movi.Valor;
+                }
+                try
+                {
+                    valor = valor / 2;
+                }
+                catch (Exception) { }
+                vistaEA.dataGridEliminar.Rows.Add(item.Fecha_asiento, item.Id, item.Numero_asiento, valor ,item.Descripcion_asiento);
             }
         }
         public void AgregarMovimiento()
@@ -125,7 +157,17 @@ namespace SistemaContable
                 RefrescarDataGripMovi();
             }
         }
-        private bool verPartidaDoble()
+        public void EliminarAsiento(int idasiento)
+        {
+            DialogResult result = MessageBox.Show("¿Desea eliminar el Asiento?", "Eliminar Asiento", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.OK)
+            {
+                Movimiento.EliminarMovimientoAsiento(idasiento);
+                Asiento.borrarAsiento(idasiento);
+                RefrescarDataGripEliminar();
+            }
+        }
+        private bool VerPartidaDoble()
         {
             float saldodebe = 0f, saldohaber = 0f;
             foreach (Movimiento item in asientoNuevo.Asiento_movimiento)
@@ -145,7 +187,7 @@ namespace SistemaContable
         }
         public void GuardarAsientoNuevo()
         {
-            if (asientoNuevo.Asiento_movimiento.Count >= 2 && verPartidaDoble())
+            if (asientoNuevo.Asiento_movimiento.Count >= 2 && VerPartidaDoble())
             {
                 DialogResult result = MessageBox.Show("¿Desea crear el asiento?", "Guardar Asiento", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.OK)

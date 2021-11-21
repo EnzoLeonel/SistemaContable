@@ -152,7 +152,7 @@ namespace SistemaContable.Vistas
             this.dataGridMovimientos.Name = "dataGridMovimientos";
             this.dataGridMovimientos.Size = new System.Drawing.Size(674, 179);
             this.dataGridMovimientos.TabIndex = 0;
-            this.dataGridMovimientos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMovimientos_CellContentClick);
+            this.dataGridMovimientos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridMovimientos_CellContentClick);
             // 
             // ColID
             // 
@@ -226,7 +226,7 @@ namespace SistemaContable.Vistas
             this.btnRestablecer.TabIndex = 15;
             this.btnRestablecer.Text = "Restablecer";
             this.btnRestablecer.UseVisualStyleBackColor = false;
-            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
+            this.btnRestablecer.Click += new System.EventHandler(this.BtnRestablecer_Click);
             // 
             // btnAgregarMovi
             // 
@@ -238,7 +238,7 @@ namespace SistemaContable.Vistas
             this.btnAgregarMovi.TabIndex = 14;
             this.btnAgregarMovi.Text = "Agregar";
             this.btnAgregarMovi.UseVisualStyleBackColor = false;
-            this.btnAgregarMovi.Click += new System.EventHandler(this.btnAgregarMovi_Click);
+            this.btnAgregarMovi.Click += new System.EventHandler(this.BtnAgregarMovi_Click);
             // 
             // btnHaber
             // 
@@ -309,7 +309,7 @@ namespace SistemaContable.Vistas
             this.boxTipoCuenta.Name = "boxTipoCuenta";
             this.boxTipoCuenta.Size = new System.Drawing.Size(121, 21);
             this.boxTipoCuenta.TabIndex = 8;
-            this.boxTipoCuenta.SelectedIndexChanged += new System.EventHandler(this.boxTipoCuenta_SelectedIndexChanged);
+            this.boxTipoCuenta.SelectedIndexChanged += new System.EventHandler(this.BoxTipoCuenta_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -333,7 +333,7 @@ namespace SistemaContable.Vistas
             this.btnGuardarAsiento.TabIndex = 2;
             this.btnGuardarAsiento.Text = "Guardar Asiento";
             this.btnGuardarAsiento.UseVisualStyleBackColor = false;
-            this.btnGuardarAsiento.Click += new System.EventHandler(this.btnGuardarAsiento_Click);
+            this.btnGuardarAsiento.Click += new System.EventHandler(this.BtnGuardarAsiento_Click);
             // 
             // btnCancelar
             // 
@@ -346,7 +346,7 @@ namespace SistemaContable.Vistas
             this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // NuevoAsiento
             // 

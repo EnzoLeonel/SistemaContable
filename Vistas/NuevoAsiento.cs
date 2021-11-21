@@ -13,11 +13,10 @@ namespace SistemaContable.Vistas
 {
     public partial class NuevoAsiento : Form
     {
-        private Controlador controlador;
+        private readonly Controlador controlador;
 
-        public NuevoAsiento(Form vistaanterior, Controlador controlador)
+        public NuevoAsiento(Controlador controlador)
         {
-            vistaanterior.Dispose();
             this.Visible = true;
             this.controlador = controlador;
             InitializeComponent();
@@ -28,7 +27,7 @@ namespace SistemaContable.Vistas
             controlador.NuevoLibroDiario();
             Dispose();
         }
-        private void comboBoxTipo_load()
+        private void ComboBoxTipo_load()
         {
             try
             {
@@ -43,7 +42,7 @@ namespace SistemaContable.Vistas
                 MessageBox.Show("Error al cargar tipo de cuentas. Por favor vuelva a intentarlo mas tarde");
             }
         }
-        private void comboBoxNombre_load()
+        private void ComboBoxNombre_load()
         {
             try
             {
@@ -62,8 +61,8 @@ namespace SistemaContable.Vistas
         {
             try
             {
-                comboBoxTipo_load();
-                comboBoxNombre_load();
+                ComboBoxTipo_load();
+                ComboBoxNombre_load();
                 boxTipoCuenta.SelectedIndex = 0;
                 boxCuenta.SelectedIndex = 0;
                 int numasiento = Asiento.TraerUltimoIdAsiento() + 1;
@@ -80,7 +79,7 @@ namespace SistemaContable.Vistas
                 Application.Exit();
             }
         }
-        private void boxTipoCuenta_SelectedIndexChanged(object sender, EventArgs e)
+        private void BoxTipoCuenta_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -98,15 +97,15 @@ namespace SistemaContable.Vistas
                 MessageBox.Show("Error al cargar tipo de cuentas. Por favor vuelva a intentarlo mas tarde.");
             }
         }
-        private void btnAgregarMovi_Click(object sender, EventArgs e)
+        private void BtnAgregarMovi_Click(object sender, EventArgs e)
         {
             controlador.AgregarMovimiento();
         }
-        private void btnRestablecer_Click(object sender, EventArgs e)
+        private void BtnRestablecer_Click(object sender, EventArgs e)
         {
             controlador.BtnRestablecerMovi();
         }
-        private void dataGridMovimientos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridMovimientos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 5 && e.RowIndex >= 0)
             {
@@ -116,12 +115,12 @@ namespace SistemaContable.Vistas
                 }catch(Exception) {}
             }
         }
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void BtnCancelar_Click(object sender, EventArgs e)
         {
             controlador.NuevoLibroDiario();
             Dispose();
         }
-        private void btnGuardarAsiento_Click(object sender, EventArgs e)
+        private void BtnGuardarAsiento_Click(object sender, EventArgs e)
         {
             controlador.GuardarAsientoNuevo();
         }
