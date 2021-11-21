@@ -70,6 +70,29 @@ namespace SistemaContable.Modelos
                 return listademovimientos.First();
             }
         }
+        public static int TraerUltimoIdMovimiento()
+        {
+            int ultimoId = 0;
+            string query = "SELECT id_movimiento FROM movimiento ORDER BY id_movimiento DESC LIMIT 1;";
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                reader.Read();
+                ultimoId = reader.GetInt32(0);
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ultimoId;
+        }
         
         public static List<Movimiento> ListarMovimientos(int idasiento)
         {
@@ -120,7 +143,7 @@ namespace SistemaContable.Modelos
                 return listademovimientos;
             }
         }
-        public void CrearMovimiento(Movimiento mov)
+        public static void CrearMovimiento(Movimiento mov)
         {
             string query = "INSERT INTO movimiento(asiento_id,cuenta_id,valor,debeohaber) VALUES(" + mov.Asiento.Id + ", " + mov.Cuenta.IdCuenta + ", " + mov.Valor + ", " + mov.Debe_haber + ")";
 
@@ -132,7 +155,6 @@ namespace SistemaContable.Modelos
             {
                 databaseConnection.Open();
                 MySqlDataReader myReader = commandDatabase.ExecuteReader();
-                MessageBox.Show("Movimiento Realizado satisfactoriamente");
                 databaseConnection.Close();
             }
             catch (Exception ex)

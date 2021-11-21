@@ -32,12 +32,12 @@ namespace SistemaContable.Vistas
         private void selectorFecha_ValueChanged(object sender, EventArgs e)
         {
             string fecha = selectorFecha.Value.ToString("yyyy-MM-dd");
-            controlador.refrescarDataGrip(fecha);
+            controlador.RefrescarDataGrip(fecha);
 
         }
         private void BotonNuevo_Click(object sender, EventArgs e)
         {
-            controlador.nuevaVistaCrearAsiento();
+            controlador.NuevaVistaCrearAsiento();
         }
     }
 }

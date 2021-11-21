@@ -152,6 +152,7 @@ namespace SistemaContable.Vistas
             this.dataGridMovimientos.Name = "dataGridMovimientos";
             this.dataGridMovimientos.Size = new System.Drawing.Size(674, 179);
             this.dataGridMovimientos.TabIndex = 0;
+            this.dataGridMovimientos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMovimientos_CellContentClick);
             // 
             // ColID
             // 
@@ -219,23 +220,25 @@ namespace SistemaContable.Vistas
             // 
             this.btnRestablecer.BackColor = System.Drawing.Color.Gainsboro;
             this.btnRestablecer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRestablecer.Location = new System.Drawing.Point(224, 92);
+            this.btnRestablecer.Location = new System.Drawing.Point(49, 93);
             this.btnRestablecer.Name = "btnRestablecer";
             this.btnRestablecer.Size = new System.Drawing.Size(109, 30);
             this.btnRestablecer.TabIndex = 15;
             this.btnRestablecer.Text = "Restablecer";
             this.btnRestablecer.UseVisualStyleBackColor = false;
+            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
             // 
             // btnAgregarMovi
             // 
             this.btnAgregarMovi.BackColor = System.Drawing.Color.Gainsboro;
             this.btnAgregarMovi.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarMovi.Location = new System.Drawing.Point(62, 92);
+            this.btnAgregarMovi.Location = new System.Drawing.Point(224, 93);
             this.btnAgregarMovi.Name = "btnAgregarMovi";
             this.btnAgregarMovi.Size = new System.Drawing.Size(109, 30);
             this.btnAgregarMovi.TabIndex = 14;
             this.btnAgregarMovi.Text = "Agregar";
             this.btnAgregarMovi.UseVisualStyleBackColor = false;
+            this.btnAgregarMovi.Click += new System.EventHandler(this.btnAgregarMovi_Click);
             // 
             // btnHaber
             // 
@@ -330,6 +333,7 @@ namespace SistemaContable.Vistas
             this.btnGuardarAsiento.TabIndex = 2;
             this.btnGuardarAsiento.Text = "Guardar Asiento";
             this.btnGuardarAsiento.UseVisualStyleBackColor = false;
+            this.btnGuardarAsiento.Click += new System.EventHandler(this.btnGuardarAsiento_Click);
             // 
             // btnCancelar
             // 
@@ -342,6 +346,7 @@ namespace SistemaContable.Vistas
             this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // NuevoAsiento
             // 
@@ -369,7 +374,6 @@ namespace SistemaContable.Vistas
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridMovimientos;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColID;
@@ -379,22 +383,23 @@ namespace SistemaContable.Vistas
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSaldo;
         private System.Windows.Forms.DataGridViewButtonColumn ColEliminar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox boxFecha;
-        private System.Windows.Forms.TextBox boxNumAsiento;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox boxDescripcion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAgregarMovi;
-        private System.Windows.Forms.RadioButton btnHaber;
-        private System.Windows.Forms.TextBox boxSaldo;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RadioButton btnDebe;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox boxCuenta;
-        private System.Windows.Forms.ComboBox boxTipoCuenta;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnRestablecer;
         private System.Windows.Forms.Button btnGuardarAsiento;
         private System.Windows.Forms.Button btnCancelar;
+        public System.Windows.Forms.ComboBox boxCuenta;
+        public System.Windows.Forms.ComboBox boxTipoCuenta;
+        public System.Windows.Forms.TextBox boxSaldo;
+        public System.Windows.Forms.RadioButton btnHaber;
+        public System.Windows.Forms.RadioButton btnDebe;
+        public System.Windows.Forms.DataGridView dataGridMovimientos;
+        public System.Windows.Forms.TextBox boxFecha;
+        public System.Windows.Forms.TextBox boxNumAsiento;
+        public System.Windows.Forms.TextBox boxDescripcion;
     }
 }

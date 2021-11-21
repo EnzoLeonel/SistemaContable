@@ -25,8 +25,8 @@ namespace SistemaContable.Vistas
         }
         private void NuevoAsiento_FormClosing(object sender, FormClosingEventArgs e)
         {
-            controlador.nuevoLibroDiario();
-            this.Dispose();
+            controlador.NuevoLibroDiario();
+            Dispose();
         }
         private void comboBoxTipo_load()
         {
@@ -66,11 +66,12 @@ namespace SistemaContable.Vistas
                 comboBoxNombre_load();
                 boxTipoCuenta.SelectedIndex = 0;
                 boxCuenta.SelectedIndex = 0;
-                int numasiento = Asiento.ListarAsientos().Last().Numero_asiento + 1;
+                int numasiento = Asiento.TraerUltimoIdAsiento() + 1;
                 boxNumAsiento.Text = numasiento.ToString();
                 boxFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 boxNumAsiento.Enabled = false;
                 boxFecha.Enabled = false;
+                btnDebe.Select();
             }
             catch (Exception)
             {
@@ -96,6 +97,33 @@ namespace SistemaContable.Vistas
             {
                 MessageBox.Show("Error al cargar tipo de cuentas. Por favor vuelva a intentarlo mas tarde.");
             }
+        }
+        private void btnAgregarMovi_Click(object sender, EventArgs e)
+        {
+            controlador.AgregarMovimiento();
+        }
+        private void btnRestablecer_Click(object sender, EventArgs e)
+        {
+            controlador.BtnRestablecerMovi();
+        }
+        private void dataGridMovimientos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5 && e.RowIndex >= 0)
+            {
+                try
+                {
+                    controlador.EliminarMovimiento(e.RowIndex);
+                }catch(Exception) {}
+            }
+        }
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            controlador.NuevoLibroDiario();
+            Dispose();
+        }
+        private void btnGuardarAsiento_Click(object sender, EventArgs e)
+        {
+            controlador.GuardarAsientoNuevo();
         }
     }
 }

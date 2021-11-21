@@ -22,7 +22,7 @@ namespace SistemaContable
 
         private void BotonLibroDiario_Click(object sender, EventArgs e)
         {
-            controlador.nuevoLibroDiario();
+            controlador.NuevoLibroDiario();
         }
 
         private void botonLibroMayor_Click(object sender, EventArgs e)

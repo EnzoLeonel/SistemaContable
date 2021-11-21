@@ -97,5 +97,52 @@ namespace SistemaContable.Modelos
                 return listadeasiento;
             }
         }
+        public static int TraerUltimoIdAsiento()
+        {
+            int ultimoId = 0;
+            string query = "SELECT id_asiento FROM asiento ORDER BY id_asiento DESC LIMIT 1;";
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                reader.Read();
+                ultimoId = reader.GetInt32(0);
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ultimoId;
+        }
+        public static int CrearAsiento(Asiento asi)
+        {
+            string query = "INSERT INTO asiento(numero_asiento, fecha_asiento, descr_asiento) VALUES(" + asi.Numero_asiento + ", '" + asi.Fecha_asiento + "', '" + asi.Descripcion_asiento + "')";
+
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            try
+            {
+                databaseConnection.Open();
+                MySqlDataReader myReader = commandDatabase.ExecuteReader();
+
+                MessageBox.Show("Asiento creado satisfactoriamente");
+
+                databaseConnection.Close();
+
+                return Convert.ToInt32(commandDatabase.LastInsertedId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return 0;
+            }
+        }
     }
 }

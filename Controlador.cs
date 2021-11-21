@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using SistemaContable.Vistas;
 using SistemaContable.Modelos;
+using System.Windows.Forms;
 
 namespace SistemaContable
 {
@@ -13,12 +14,14 @@ namespace SistemaContable
     {
         private MenuPrincipal vistaMenuP;
         private LibroDiario vistaLD;
+        private NuevoAsiento vistaNA;
+        private Asiento asientoNuevo;
         public Controlador() { }
-        public Controlador(MenuPrincipal vistaMenuP /*,Modelo modelo*/)
+        public Controlador(MenuPrincipal vistaMenuP)
         {
             this.vistaMenuP = vistaMenuP;
         }
-        public void nuevoLibroDiario()
+        public void NuevoLibroDiario()
         {
             if (SQLConexion.Conexion.hayConexion())
             {
@@ -30,16 +33,16 @@ namespace SistemaContable
                 vistaLD.Visible = true;
                 vistaMenuP.Visible = false;
 
-                refrescarDataGrip(fecha);
+                RefrescarDataGrip(fecha);
             }
         }
-        public void nuevaVistaCrearAsiento()
+        public void NuevaVistaCrearAsiento()
         {
             if (SQLConexion.Conexion.hayConexion())
             {
-                string fecha = DateTime.Now.ToString("yyyy-MM-dd");
-
-                NuevoAsiento vistaNA = new NuevoAsiento(vistaLD, this);
+                asientoNuevo = new Asiento();
+                asientoNuevo.Asiento_movimiento = new List<Movimiento>();
+                vistaNA = new NuevoAsiento(vistaLD, this);
             }
         }
         private string DebeHaberString(Movimiento movi, bool seleccion)
@@ -53,7 +56,7 @@ namespace SistemaContable
                 return null;
             }
         }
-        public void refrescarDataGrip(string fecha)
+        public void RefrescarDataGrip(string fecha)
         {
             Asiento asiento = new Asiento();
             List<Asiento> asientos = asiento.ListarAsientosporFecha(fecha);
@@ -68,10 +71,105 @@ namespace SistemaContable
                 }
             }
         }
-        public void agregarMovimiento()
+        public void AgregarMovimiento()
         {
-
+            DialogResult result = MessageBox.Show("¿Desea agregar el movimiento?", "Crear Movimiento", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    int numasiento = Movimiento.TraerUltimoIdMovimiento() + 1 + asientoNuevo.Asiento_movimiento.Count;
+                    Movimiento nuevoMovimiento = new Movimiento();
+                    nuevoMovimiento.Id = numasiento;
+                    nuevoMovimiento.Valor = float.Parse(vistaNA.boxSaldo.Text); //Recupero el saldo del textBox
+                    nuevoMovimiento.Debe_haber = Convert.ToBoolean(vistaNA.btnDebe.Checked); //Guardo en true si es debe, false si es haber
+                    nuevoMovimiento.Cuenta = new Cuenta();
+                    nuevoMovimiento.Cuenta.IdCuenta = ((ComboBoxItem)vistaNA.boxCuenta.SelectedItem).HiddenValue;
+                    nuevoMovimiento.Cuenta.NombreCuenta = vistaNA.boxCuenta.SelectedItem.ToString();
+                    nuevoMovimiento.Cuenta.Tipocuenta = new TipodeCuenta();
+                    nuevoMovimiento.Cuenta.Tipocuenta.Id = ((ComboBoxItem)vistaNA.boxTipoCuenta.SelectedItem).HiddenValue;
+                    nuevoMovimiento.Cuenta.Tipocuenta.DescripcionTipo = vistaNA.boxTipoCuenta.SelectedItem.ToString();
+                    asientoNuevo.Asiento_movimiento.Add(nuevoMovimiento);
+                    RefrescarDataGripMovi();
+                    BtnRestablecerMovi();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Los datos son incorrectos");
+                }
+            }
         }
+        private void RefrescarDataGripMovi()
+        {
+            vistaNA.dataGridMovimientos.Rows.Clear();
+            foreach (Movimiento item in asientoNuevo.Asiento_movimiento)
+            {
+                string debehaber = "";
+                if (item.Debe_haber) debehaber = "Debe";
+                else debehaber = "Haber";
+                vistaNA.dataGridMovimientos.Rows.Add(item.Id, item.Cuenta.NombreCuenta, item.Cuenta.Tipocuenta.DescripcionTipo, item.Valor, debehaber);
+            }
+        }
+        public void BtnRestablecerMovi()
+        {
+            vistaNA.boxTipoCuenta.SelectedIndex = 0;
+            vistaNA.boxCuenta.SelectedIndex = 0;
+            vistaNA.boxSaldo.Text = "";
+        }
+        public void EliminarMovimiento(int indice)
+        {
+            DialogResult result = MessageBox.Show("¿Desea eliminar el movimiento?", "Eliminar Movimiento", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.OK)
+            {
+                asientoNuevo.Asiento_movimiento.RemoveAt(indice);
+                RefrescarDataGripMovi();
+            }
+        }
+        private bool verPartidaDoble()
+        {
+            float saldodebe = 0f, saldohaber = 0f;
+            foreach (Movimiento item in asientoNuevo.Asiento_movimiento)
+            {
+                if (item.Debe_haber)
+                {
+                    saldodebe = saldodebe + item.Valor;
+                }
+                else
+                {
+                    saldohaber = saldohaber + item.Valor;
+                }
 
+            }
+            if (saldodebe == saldohaber) return true;
+            else return false;
+        }
+        public void GuardarAsientoNuevo()
+        {
+            if (asientoNuevo.Asiento_movimiento.Count >= 2 && verPartidaDoble())
+            {
+                DialogResult result = MessageBox.Show("¿Desea crear el asiento?", "Guardar Asiento", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                if (result == DialogResult.OK)
+                {
+                    asientoNuevo.Numero_asiento = int.Parse(vistaNA.boxNumAsiento.Text);
+                    asientoNuevo.Descripcion_asiento = vistaNA.boxDescripcion.Text;
+                    asientoNuevo.Fecha_asiento = vistaNA.boxFecha.Text;
+                    int numAsiento = Asiento.CrearAsiento(asientoNuevo);
+
+                    foreach (Movimiento item in asientoNuevo.Asiento_movimiento)
+                    {
+                        item.Asiento = asientoNuevo;
+                        item.Asiento.Id = numAsiento;
+                        Movimiento.CrearMovimiento(item);
+                    }
+                    asientoNuevo = null;
+                    vistaNA.Dispose();
+                    NuevoLibroDiario();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Datos incorrectos, no tienen 2 movimientos o no estan equilibrados", "Datos incorrectos", MessageBoxButtons.OK);
+            }
+        }
     }
 }
