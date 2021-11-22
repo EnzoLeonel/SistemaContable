@@ -78,7 +78,7 @@ namespace SistemaContable
                 List<Movimiento> movimientos = Movimiento.ListarMovimientos(item.Id);
                 foreach (Movimiento movi in movimientos)
                 {
-                    vistaLD.dataGridAsientos.Rows.Add(item.Id, item.Numero_asiento, "", movi.Cuenta.NombreCuenta, movi.Cuenta.Tipocuenta.DescripcionTipo ,DebeHaberString(movi, false), DebeHaberString(movi, true), "");
+                    vistaLD.dataGridAsientos.Rows.Add(item.Id, item.Numero_asiento, "", movi.Cuenta.NombreCuenta, movi.Cuenta.Tipocuenta.DescripcionTipo ,DebeHaberString(movi, true), DebeHaberString(movi, false), "");
                 }
             }
         }

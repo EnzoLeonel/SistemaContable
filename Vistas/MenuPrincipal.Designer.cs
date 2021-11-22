@@ -29,6 +29,7 @@ namespace SistemaContable
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
             this.botonLibroMayor = new System.Windows.Forms.Button();
             this.botonLibroDiario = new System.Windows.Forms.Button();
             this.botonAjustes = new System.Windows.Forms.Button();
@@ -85,6 +86,7 @@ namespace SistemaContable
             this.Controls.Add(this.botonAjustes);
             this.Controls.Add(this.botonLibroMayor);
             this.Controls.Add(this.botonLibroDiario);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu Principal";

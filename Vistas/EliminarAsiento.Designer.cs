@@ -29,6 +29,7 @@ namespace SistemaContable.Vistas
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EliminarAsiento));
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.dataGridEliminar = new System.Windows.Forms.DataGridView();
             this.ColFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,9 +122,10 @@ namespace SistemaContable.Vistas
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 268);
             this.Controls.Add(this.groupBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EliminarAsiento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EliminarAsiento";
+            this.Text = "Eliminar Asiento";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EliminarAsiento_FormClosing);
             this.groupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEliminar)).EndInit();

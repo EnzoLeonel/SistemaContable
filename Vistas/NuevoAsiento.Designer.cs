@@ -29,6 +29,7 @@ namespace SistemaContable.Vistas
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NuevoAsiento));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.boxDescripcion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -358,9 +359,10 @@ namespace SistemaContable.Vistas
             this.Controls.Add(this.btnGuardarAsiento);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NuevoAsiento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NuevoAsiento";
+            this.Text = "Nuevo Asiento";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NuevoAsiento_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
