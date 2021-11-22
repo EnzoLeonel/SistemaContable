@@ -165,5 +165,72 @@ namespace SistemaContable.Modelos
                 MessageBox.Show(ex.Message);
             }
         }
+        public static List<Asiento> ListarAsientosporMes(int mes, int anio)
+        {
+            List<Asiento> listadeasientos = new List<Asiento>();
+            string[] fechas = Convertirmesanio(mes, anio);
+            string query = "SELECT * FROM asiento a WHERE (a.fecha_asiento >= '" + fechas[0] + "' AND a.fecha_asiento < '" + fechas[1] + "')";
+
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Asiento asiento = new Asiento();
+                        asiento.Id = reader.GetInt32(0);
+                        asiento.Numero_asiento = reader.GetInt32(1);
+                        asiento.Fecha_asiento = reader.GetDateTime(2).ToShortDateString();
+                        asiento.Descripcion_asiento = reader.GetString(3);
+                        listadeasientos.Add(asiento);
+                    }
+                }
+
+                databaseConnection.Close();
+                return listadeasientos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return listadeasientos;
+            }
+        }
+        public static string[] Convertirmesanio(int mes, int anio)
+        {
+            string[] resultado = new string[2];
+            if (mes == 12)
+            {
+                resultado[0] = anio + "-" + mes + "-" + "01";
+                anio = anio + 1;
+                resultado[1] = anio + "-01-01";
+            }
+            else if (mes >= 1 && mes < 9)
+            {
+                resultado[0] = anio + "-" + 0 + mes + "-" + "01";
+                mes = mes + 1;
+                resultado[1] = anio + "-" + 0 + mes + "-" + "01";
+            }
+            else if (mes == 9)
+            {
+                resultado[0] = anio + "-" + 0 + mes + "-" + "01";
+                resultado[1] = anio + "-10-01";
+            }
+            else
+            {
+                resultado[0] = anio + "-" + mes + "-" + "01";
+                mes = mes + 1;
+                resultado[1] = anio + "-" + mes + "-" + "01";
+            }
+
+            return resultado;
+        }
     }
 }

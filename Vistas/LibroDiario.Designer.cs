@@ -171,6 +171,7 @@
             this.btnMostrarMes.TabIndex = 1;
             this.btnMostrarMes.Text = "Mostrar mes";
             this.btnMostrarMes.UseVisualStyleBackColor = true;
+            this.btnMostrarMes.Click += new System.EventHandler(this.btnMostrarMes_Click);
             // 
             // selectorFecha
             // 
@@ -205,7 +206,6 @@
         public System.Windows.Forms.DataGridView dataGridAsientos;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnMostrarMes;
-        private System.Windows.Forms.DateTimePicker selectorFecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColNAsiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColFecha;
@@ -216,5 +216,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDescripcion;
         private System.Windows.Forms.Button BotonNuevo;
         private System.Windows.Forms.Button BotonEliminar;
+        public System.Windows.Forms.DateTimePicker selectorFecha;
     }
 }

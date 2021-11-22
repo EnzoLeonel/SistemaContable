@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using SistemaContable.Vistas;
 using SistemaContable.Modelos;
 using System.Windows.Forms;
@@ -14,6 +13,7 @@ namespace SistemaContable
     {
         private MenuPrincipal vistaMenuP;
         private LibroDiario vistaLD;
+        private LibroMayor vistaLM;
         private NuevoAsiento vistaNA;
         private Asiento asientoNuevo;
         private EliminarAsiento vistaEA;
@@ -28,13 +28,22 @@ namespace SistemaContable
             {
                 string fecha = DateTime.Now.ToString("yyyy-MM-dd");
                 
-
-                LibroDiario vistaLD = new LibroDiario(vistaMenuP, this);
-                this.vistaLD = vistaLD;
+                vistaLD = new LibroDiario(vistaMenuP, this);
                 vistaLD.Visible = true;
                 vistaMenuP.Visible = false;
 
                 RefrescarDataGrip(fecha);
+            }
+        }
+        public void NuevoLibroMayor()
+        {
+            if (SQLConexion.Conexion.hayConexion())
+            {
+                vistaLM = new LibroMayor(vistaMenuP, this)
+                {
+                    Visible = true
+                };
+                vistaMenuP.Visible = false;
             }
         }
         public void NuevaVistaCrearAsiento()
@@ -211,6 +220,23 @@ namespace SistemaContable
             else
             {
                 MessageBox.Show("Datos incorrectos, no tienen 2 movimientos o no estan equilibrados", "Datos incorrectos", MessageBoxButtons.OK);
+            }
+        }
+        public void MostrarMesLD()
+        {
+            DateTime fecha = vistaLD.selectorFecha.Value;
+            int mes = fecha.Month;
+            int anio = fecha.Year;
+            List<Asiento> asientoAMostrar = Asiento.ListarAsientosporMes(mes, anio);
+            vistaLD.dataGridAsientos.Rows.Clear();
+            foreach (Asiento item in asientoAMostrar)
+            {
+                vistaLD.dataGridAsientos.Rows.Add(item.Id, item.Numero_asiento, item.Fecha_asiento, "", "", "", "", item.Descripcion_asiento);
+                List<Movimiento> movimientos = Movimiento.ListarMovimientos(item.Id);
+                foreach (Movimiento movi in movimientos)
+                {
+                    vistaLD.dataGridAsientos.Rows.Add(item.Id, item.Numero_asiento, "", movi.Cuenta.NombreCuenta, movi.Cuenta.Tipocuenta.DescripcionTipo, DebeHaberString(movi, true), DebeHaberString(movi, false), "");
+                }
             }
         }
     }

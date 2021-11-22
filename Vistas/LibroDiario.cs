@@ -12,7 +12,7 @@ namespace SistemaContable.Vistas
 {
     public partial class LibroDiario : Form
     {
-        private Controlador controlador;
+        private readonly Controlador controlador;
         private Form vistaAnterior;
 
         public Form VistaAnterior { get => vistaAnterior; set => vistaAnterior = value; }
@@ -42,6 +42,11 @@ namespace SistemaContable.Vistas
         private void BotonEliminar_Click(object sender, EventArgs e)
         {
             controlador.NuevaVistaEliminarAsiento();
+        }
+
+        private void btnMostrarMes_Click(object sender, EventArgs e)
+        {
+            controlador.MostrarMesLD();
         }
     }
 }

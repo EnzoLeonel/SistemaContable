@@ -13,10 +13,14 @@ namespace SistemaContable.Modelos
         private int idCuenta;
         private string nombreCuenta;
         private TipodeCuenta tipocuenta;
+        private List<Movimiento> movimientosdebe;
+        private List<Movimiento> movimientoshaber;
 
         public int IdCuenta { get => idCuenta; set => idCuenta = value; }
         public string NombreCuenta { get => nombreCuenta; set => nombreCuenta = value; }
         internal TipodeCuenta Tipocuenta { get => tipocuenta; set => tipocuenta = value; }
+        internal List<Movimiento> Movimientosdebe { get => movimientosdebe; set => movimientosdebe = value; }
+        internal List<Movimiento> Movimientoshaber { get => movimientoshaber; set => movimientoshaber = value; }
         public Cuenta() { }
 
         public static List<Cuenta> ListarCuentas(int idtipocuenta)

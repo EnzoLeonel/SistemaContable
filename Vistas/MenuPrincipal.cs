@@ -26,16 +26,8 @@ namespace SistemaContable
         }
 
         private void botonLibroMayor_Click(object sender, EventArgs e)
-        {/*
-            try { 
-                LibroMayor vistaLM = new LibroMayor(this);
-                vistaLM.Visible = true;
-                this.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }*/
+        {
+            controlador.NuevoLibroMayor();
         }
         private void MenuPrincipal_Load(object sender, EventArgs e){}
 
