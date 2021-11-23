@@ -63,5 +63,35 @@ namespace SistemaContable.Modelos
                 return listadecuentas;
             }
         }
+        public static List<string> TraerNombresCuentas()
+        {
+            List<string> listadenombres = new List<string>();
+            string query = "SELECT nombre_cuenta FROM cuentas;";
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        listadenombres.Add(reader.GetString(0));
+                    }
+                }
+                databaseConnection.Close();
+                return listadenombres;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return listadenombres;
+            }
+        }
     }
 }

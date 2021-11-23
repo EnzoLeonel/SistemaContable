@@ -32,20 +32,20 @@ namespace SistemaContable.Vistas
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibroMayor));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.boxMes = new System.Windows.Forms.ComboBox();
+            this.boxAnio = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridLibroMayor = new System.Windows.Forms.DataGridView();
             this.ColFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDebe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColHaber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.boxCuentas = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridLibroMayor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -70,27 +70,40 @@ namespace SistemaContable.Vistas
             this.label2.TabIndex = 2;
             this.label2.Text = "Año:";
             // 
-            // comboBox1
+            // boxMes
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(77, 13);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(102, 27);
-            this.comboBox1.TabIndex = 3;
+            this.boxMes.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxMes.FormattingEnabled = true;
+            this.boxMes.Items.AddRange(new object[] {
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"});
+            this.boxMes.Location = new System.Drawing.Point(77, 13);
+            this.boxMes.Name = "boxMes";
+            this.boxMes.Size = new System.Drawing.Size(114, 27);
+            this.boxMes.TabIndex = 3;
             // 
-            // comboBox2
+            // boxAnio
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(248, 13);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(77, 27);
-            this.comboBox2.TabIndex = 4;
+            this.boxAnio.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxAnio.FormattingEnabled = true;
+            this.boxAnio.Location = new System.Drawing.Point(248, 13);
+            this.boxAnio.Name = "boxAnio";
+            this.boxAnio.Size = new System.Drawing.Size(77, 27);
+            this.boxAnio.TabIndex = 4;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dataGridLibroMayor);
             this.groupBox1.Location = new System.Drawing.Point(13, 49);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(590, 308);
@@ -98,41 +111,21 @@ namespace SistemaContable.Vistas
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cuentas";
             // 
-            // dataGridView1
+            // dataGridLibroMayor
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.GhostWhite;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridLibroMayor.BackgroundColor = System.Drawing.Color.GhostWhite;
+            this.dataGridLibroMayor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridLibroMayor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColFecha,
             this.ID,
             this.ColCuenta,
             this.ColDebe,
             this.ColHaber,
             this.ColTotal});
-            this.dataGridView1.Location = new System.Drawing.Point(16, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(568, 282);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Font = new System.Drawing.Font("Arial", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(351, 13);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(140, 26);
-            this.comboBox3.TabIndex = 6;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(507, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Mostrar Año";
-            this.button1.UseVisualStyleBackColor = false;
+            this.dataGridLibroMayor.Location = new System.Drawing.Point(16, 20);
+            this.dataGridLibroMayor.Name = "dataGridLibroMayor";
+            this.dataGridLibroMayor.Size = new System.Drawing.Size(568, 282);
+            this.dataGridLibroMayor.TabIndex = 0;
             // 
             // ColFecha
             // 
@@ -182,6 +175,28 @@ namespace SistemaContable.Vistas
             this.ColTotal.ReadOnly = true;
             this.ColTotal.Width = 90;
             // 
+            // boxCuentas
+            // 
+            this.boxCuentas.Font = new System.Drawing.Font("Arial", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxCuentas.FormattingEnabled = true;
+            this.boxCuentas.Items.AddRange(new object[] {
+            "Todas"});
+            this.boxCuentas.Location = new System.Drawing.Point(351, 13);
+            this.boxCuentas.Name = "boxCuentas";
+            this.boxCuentas.Size = new System.Drawing.Size(140, 24);
+            this.boxCuentas.TabIndex = 6;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(507, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Mostrar Año";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // LibroMayor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,10 +204,10 @@ namespace SistemaContable.Vistas
             this.BackColor = System.Drawing.Color.MintCream;
             this.ClientSize = new System.Drawing.Size(613, 369);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.boxCuentas);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.boxAnio);
+            this.Controls.Add(this.boxMes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -200,9 +215,8 @@ namespace SistemaContable.Vistas
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Libro Mayor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibroMayor_FormClosing);
-            this.Load += new System.EventHandler(this.LibroMayor_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridLibroMayor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,11 +226,7 @@ namespace SistemaContable.Vistas
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColFecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
@@ -224,5 +234,9 @@ namespace SistemaContable.Vistas
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDebe;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColHaber;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotal;
+        public System.Windows.Forms.DataGridView dataGridLibroMayor;
+        public System.Windows.Forms.ComboBox boxMes;
+        public System.Windows.Forms.ComboBox boxAnio;
+        public System.Windows.Forms.ComboBox boxCuentas;
     }
 }

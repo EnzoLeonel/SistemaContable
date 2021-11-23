@@ -44,6 +44,40 @@ namespace SistemaContable
                     Visible = true
                 };
                 vistaMenuP.Visible = false;
+                try
+                {
+                    int ultimoA = 0, primerA = 0;
+                    DateTime ultimaFecha = DateTime.Parse(Asiento.TraerUltimaFecha());
+                    DateTime primeraFecha = DateTime.Parse(Asiento.TraerPrimeraFecha());
+                    vistaLM.boxMes.SelectedIndex = Int32.Parse(ultimaFecha.Month.ToString()) - 1;
+                    ultimoA = Int32.Parse(ultimaFecha.Year.ToString());
+                    primerA = Int32.Parse(primeraFecha.Year.ToString());
+                    for (int i = ultimoA; i >= primerA; i--)
+                    {
+                        vistaLM.boxAnio.Items.Add(i);
+                    }
+                    vistaLM.boxAnio.SelectedIndex = 0;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error al cargar fechas");
+                    vistaLM.VistaAnterior.Visible = true;
+                    vistaLM.Dispose();
+                }
+                try
+                {
+                    List<string> cuentas = Cuenta.TraerNombresCuentas();
+                    foreach (string cuenta in cuentas)
+                    {
+                        vistaLM.boxCuentas.Items.Add(cuenta);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error al cargar cuentas");
+                    vistaLM.VistaAnterior.Visible = true;
+                    vistaLM.Dispose();
+                }
             }
         }
         public void NuevaVistaCrearAsiento()

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaContable.Modelos;
 
 namespace SistemaContable.Vistas
 {
@@ -21,16 +22,12 @@ namespace SistemaContable.Vistas
             VistaAnterior = vistaanterior;
             this.controlador = controlador;
             InitializeComponent();
+            boxCuentas.SelectedIndex = 0;
         }
         private void LibroMayor_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Dispose();
             VistaAnterior.Visible = true;
-            this.Dispose();
-        }
-
-        private void LibroMayor_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -204,5 +204,85 @@ namespace SistemaContable.Modelos
                 MessageBox.Show(ex.Message);
             }
         }
+        public static List<Movimiento> TraerMovimientosporCuenta(int mes, int anio, int cuentaId)
+        {
+            string inicio = anio + "-" + mes + "-" + "01";
+            string final = anio + "-" + mes + "-" + "31";
+            List<Movimiento> listademovimientos = new List<Movimiento>();
+            string query = "SELECT a.fecha_asiento, m.id_movimiento, m.cuenta_id, m.valor, m.debeohaber FROM asiento a, movimiento m, cuentas c WHERE (m.asiento_id = a.id_asiento AND m.cuenta_id = " + cuentaId + " AND m.cuenta_id = c.id_cuenta AND fecha_asiento >= '" + inicio + "' AND fecha_asiento <= '" + final + "')";
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Movimiento movimiento = new Movimiento();
+                        movimiento.Id = reader.GetInt32(1);
+                        movimiento.Valor = reader.GetFloat(3);
+                        movimiento.Debe_haber = reader.GetBoolean(4);
+                        movimiento.cuenta = new Cuenta();
+                        movimiento.cuenta.IdCuenta = reader.GetInt32(2);
+                        movimiento.asiento = new Asiento();
+                        movimiento.asiento.Fecha_asiento = reader.GetString(0);
+                        listademovimientos.Add(movimiento);
+                    }
+                }
+                databaseConnection.Close();
+                return listademovimientos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return listademovimientos;
+            }
+        }
+        public static List<Movimiento> TraerMovimientosporCuenta(int anio, int cuentaId)
+        {
+            string inicio = anio + "-" + "01" + "-" + "01";
+            string final = anio + "-" + "12" + "-" + "31";
+            List<Movimiento> listademovimientos = new List<Movimiento>();
+            string query = "SELECT a.fecha_asiento, m.id_movimiento, m.cuenta_id, m.valor, m.debeohaber FROM asiento a, movimiento m, cuentas c WHERE (m.asiento_id = a.id_asiento AND m.cuenta_id = " + cuentaId + " AND m.cuenta_id = c.id_cuenta AND fecha_asiento >= '" + inicio + "' AND fecha_asiento <= '" + final + "')";
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Movimiento movimiento = new Movimiento();
+                        movimiento.Id = reader.GetInt32(1);
+                        movimiento.Valor = reader.GetFloat(3);
+                        movimiento.Debe_haber = reader.GetBoolean(4);
+                        movimiento.cuenta = new Cuenta();
+                        movimiento.cuenta.IdCuenta = reader.GetInt32(2);
+                        movimiento.asiento = new Asiento();
+                        movimiento.asiento.Fecha_asiento = reader.GetString(0);
+                        listademovimientos.Add(movimiento);
+                    }
+                }
+                databaseConnection.Close();
+                return listademovimientos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return listademovimientos;
+            }
+        }
     }
 }

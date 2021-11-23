@@ -120,6 +120,52 @@ namespace SistemaContable.Modelos
             }
             return ultimoId;
         }
+        public static string TraerUltimaFecha()
+        {
+            string ultimaFecha = "";
+            string query = "SELECT fecha_asiento FROM asiento ORDER BY fecha_asiento DESC LIMIT 1;";
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                reader.Read();
+                ultimaFecha = reader.GetString(0);
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ultimaFecha;
+        }
+        public static string TraerPrimeraFecha()
+        {
+            string primeraFecha = "";
+            string query = "SELECT fecha_asiento FROM asiento ORDER BY fecha_asiento ASC LIMIT 1;";
+            MySqlConnection databaseConnection = new MySqlConnection(SQLConexion.Conexion.getDatos());
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+            MySqlDataReader reader;
+
+            try
+            {
+                databaseConnection.Open();
+                reader = commandDatabase.ExecuteReader();
+                reader.Read();
+                primeraFecha = reader.GetString(0);
+                databaseConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return primeraFecha;
+        }
         public static int CrearAsiento(Asiento asi)
         {
             string query = "INSERT INTO asiento(numero_asiento, fecha_asiento, descr_asiento) VALUES(" + asi.Numero_asiento + ", '" + asi.Fecha_asiento + "', '" + asi.Descripcion_asiento + "')";
