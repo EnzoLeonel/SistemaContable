@@ -27,7 +27,7 @@ namespace SistemaContable
             if (SQLConexion.Conexion.hayConexion())
             {
                 string fecha = DateTime.Now.ToString("yyyy-MM-dd");
-                
+
                 vistaLD = new LibroDiario(vistaMenuP, this);
                 vistaLD.Visible = true;
                 vistaMenuP.Visible = false;
@@ -78,6 +78,12 @@ namespace SistemaContable
                     vistaLM.VistaAnterior.Visible = true;
                     vistaLM.Dispose();
                 }
+                vistaLM.boxCuentas.SelectedIndex = 0;
+                RefrescarDataGripLM();
+                //Se agregan los eventos de los comboBox despues de crear todo ya que sino se activan solos cuando se crea la vista nueva
+                vistaLM.boxAnio.SelectedIndexChanged += new EventHandler(vistaLM.boxAnio_SelectedIndexChanged);
+                vistaLM.boxCuentas.SelectedIndexChanged += new EventHandler(vistaLM.boxCuentas_SelectedIndexChanged);
+                vistaLM.boxMes.SelectedIndexChanged += new EventHandler(vistaLM.boxMes_SelectedIndexChanged);
             }
         }
         public void NuevaVistaCrearAsiento()
@@ -96,19 +102,30 @@ namespace SistemaContable
             {
                 vistaLD.Dispose();
                 vistaEA = new EliminarAsiento(this);
-                
+
                 RefrescarDataGripEliminar();
             }
         }
         private string DebeHaberString(Movimiento movi, bool seleccion)
         {
-            if(seleccion == movi.Debe_haber)
+            if (seleccion == movi.Debe_haber)
             {
                 return movi.Valor.ToString();
             }
             else
             {
                 return null;
+            }
+        }
+        private float DebeHaberFloat(Movimiento movi, bool seleccion)
+        {
+            if (seleccion == movi.Debe_haber)
+            {
+                return movi.Valor;
+            }
+            else
+            {
+                return 0;
             }
         }
         public void RefrescarDataGrip(string fecha)
@@ -121,7 +138,7 @@ namespace SistemaContable
                 List<Movimiento> movimientos = Movimiento.ListarMovimientos(item.Id);
                 foreach (Movimiento movi in movimientos)
                 {
-                    vistaLD.dataGridAsientos.Rows.Add(item.Id, item.Numero_asiento, "", movi.Cuenta.NombreCuenta, movi.Cuenta.Tipocuenta.DescripcionTipo ,DebeHaberString(movi, true), DebeHaberString(movi, false), "");
+                    vistaLD.dataGridAsientos.Rows.Add(item.Id, item.Numero_asiento, "", movi.Cuenta.NombreCuenta, movi.Cuenta.Tipocuenta.DescripcionTipo, DebeHaberString(movi, true), DebeHaberString(movi, false), "");
                 }
             }
         }
@@ -143,7 +160,81 @@ namespace SistemaContable
                     valor = valor / 2;
                 }
                 catch (Exception) { }
-                vistaEA.dataGridEliminar.Rows.Add(item.Fecha_asiento, item.Id, item.Numero_asiento, valor ,item.Descripcion_asiento);
+                vistaEA.dataGridEliminar.Rows.Add(item.Fecha_asiento, item.Id, item.Numero_asiento, valor, item.Descripcion_asiento);
+            }
+        }
+        public void RefrescarDataGripLM()
+        {
+            vistaLM.dataGridLibroMayor.Rows.Clear();
+            List<Movimiento> movi;
+            try
+            {
+                if (!vistaLM.checkAnio.Checked)
+                {
+                    vistaLM.boxMes.Enabled = true;
+                    if (vistaLM.boxCuentas.SelectedIndex == 0)
+                    {
+                        int mes = vistaLM.boxMes.SelectedIndex + 1;
+                        int anio = Int32.Parse(vistaLM.boxAnio.SelectedItem.ToString());
+                        int cantidad = vistaLM.boxCuentas.Items.Count;
+                        for (int i = 1; i < cantidad; i++)
+                        {
+                            movi = Movimiento.TraerMovimientosporCuenta(mes, anio, i);
+                            MovimientosaMostrar(movi, i);
+                        }
+                    }
+                    else
+                    {
+                        int mes = vistaLM.boxMes.SelectedIndex + 1;
+                        int anio = Int32.Parse(vistaLM.boxAnio.SelectedItem.ToString());
+                        int cuentaid = vistaLM.boxCuentas.SelectedIndex;
+                        movi = Movimiento.TraerMovimientosporCuenta(mes, anio, cuentaid);
+                        MovimientosaMostrar(movi, cuentaid);
+                    }
+                }
+                else
+                {
+                    vistaLM.boxMes.Enabled = false;
+                    if (vistaLM.boxCuentas.SelectedIndex == 0)
+                    {
+                        int anio = Int32.Parse(vistaLM.boxAnio.SelectedItem.ToString());
+                        int cantidad = vistaLM.boxCuentas.Items.Count;
+                        for (int i = 1; i < cantidad; i++)
+                        {
+                            movi = Movimiento.TraerMovimientosporCuenta(anio, i);
+                            MovimientosaMostrar(movi, i);
+                        }
+                    }
+                    else
+                    {
+                        int anio = Int32.Parse(vistaLM.boxAnio.SelectedItem.ToString());
+                        int cuentaid = vistaLM.boxCuentas.SelectedIndex;
+                        movi = Movimiento.TraerMovimientosporCuenta(anio, cuentaid);
+                        MovimientosaMostrar(movi, cuentaid);
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                vistaLM.VistaAnterior.Visible = true;
+                vistaLM.Dispose();
+            }
+        }
+        private void MovimientosaMostrar(List<Movimiento> movi, int cuentaid)
+        {
+            if (movi.Any())
+            {
+                vistaLM.dataGridLibroMayor.Rows.Add("", "", "", "", "", "");
+                vistaLM.dataGridLibroMayor.Rows.Add("", "", vistaLM.boxCuentas.Items[cuentaid].ToString(), "", "", "");
+                float total = 0;
+                foreach (Movimiento item in movi)
+                {
+                    vistaLM.dataGridLibroMayor.Rows.Add(item.Asiento.Fecha_asiento, item.Id, "", DebeHaberString(item, true), DebeHaberString(item, false), "");
+                    total += (DebeHaberFloat(item, true) - DebeHaberFloat(item, false));
+                }
+                int ultimaRow = vistaLM.dataGridLibroMayor.Rows.Count - 1;
+                int indice = ultimaRow - movi.Count - 1;
+                vistaLM.dataGridLibroMayor.Rows[indice].Cells[5].Value = ((decimal)total);
             }
         }
         public void AgregarMovimiento()

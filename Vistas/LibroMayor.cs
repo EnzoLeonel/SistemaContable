@@ -5,9 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SistemaContable.Modelos;
 
 namespace SistemaContable.Vistas
 {
@@ -22,12 +20,31 @@ namespace SistemaContable.Vistas
             VistaAnterior = vistaanterior;
             this.controlador = controlador;
             InitializeComponent();
-            boxCuentas.SelectedIndex = 0;
         }
         private void LibroMayor_FormClosing(object sender, FormClosingEventArgs e)
         {
             Dispose();
             VistaAnterior.Visible = true;
+        }
+
+        private void checkAnio_CheckedChanged(object sender, EventArgs e)
+        {
+            controlador.RefrescarDataGripLM();
+        }
+        
+        public void boxMes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controlador.RefrescarDataGripLM();
+        }
+
+        public void boxAnio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controlador.RefrescarDataGripLM();
+        }
+
+        public void boxCuentas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controlador.RefrescarDataGripLM();
         }
     }
 }

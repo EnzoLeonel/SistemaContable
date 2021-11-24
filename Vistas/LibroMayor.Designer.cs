@@ -43,7 +43,7 @@ namespace SistemaContable.Vistas
             this.ColHaber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boxCuentas = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.checkAnio = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLibroMayor)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +106,7 @@ namespace SistemaContable.Vistas
             this.groupBox1.Controls.Add(this.dataGridLibroMayor);
             this.groupBox1.Location = new System.Drawing.Point(13, 49);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(590, 308);
+            this.groupBox1.Size = new System.Drawing.Size(611, 321);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cuentas";
@@ -124,7 +124,7 @@ namespace SistemaContable.Vistas
             this.ColTotal});
             this.dataGridLibroMayor.Location = new System.Drawing.Point(16, 20);
             this.dataGridLibroMayor.Name = "dataGridLibroMayor";
-            this.dataGridLibroMayor.Size = new System.Drawing.Size(568, 282);
+            this.dataGridLibroMayor.Size = new System.Drawing.Size(589, 295);
             this.dataGridLibroMayor.TabIndex = 0;
             // 
             // ColFecha
@@ -186,24 +186,25 @@ namespace SistemaContable.Vistas
             this.boxCuentas.Size = new System.Drawing.Size(140, 24);
             this.boxCuentas.TabIndex = 6;
             // 
-            // button1
+            // checkAnio
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(507, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Mostrar Año";
-            this.button1.UseVisualStyleBackColor = false;
+            this.checkAnio.AutoSize = true;
+            this.checkAnio.Font = new System.Drawing.Font("Arial", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkAnio.Location = new System.Drawing.Point(512, 17);
+            this.checkAnio.Name = "checkAnio";
+            this.checkAnio.Size = new System.Drawing.Size(91, 19);
+            this.checkAnio.TabIndex = 7;
+            this.checkAnio.Text = "Mostrar año";
+            this.checkAnio.UseVisualStyleBackColor = true;
+            this.checkAnio.CheckedChanged += new System.EventHandler(this.checkAnio_CheckedChanged);
             // 
             // LibroMayor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MintCream;
-            this.ClientSize = new System.Drawing.Size(613, 369);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(636, 382);
+            this.Controls.Add(this.checkAnio);
             this.Controls.Add(this.boxCuentas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.boxAnio);
@@ -219,7 +220,6 @@ namespace SistemaContable.Vistas
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLibroMayor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -227,7 +227,6 @@ namespace SistemaContable.Vistas
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColFecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCuenta;
@@ -238,5 +237,6 @@ namespace SistemaContable.Vistas
         public System.Windows.Forms.ComboBox boxMes;
         public System.Windows.Forms.ComboBox boxAnio;
         public System.Windows.Forms.ComboBox boxCuentas;
+        public System.Windows.Forms.CheckBox checkAnio;
     }
 }
