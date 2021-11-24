@@ -32,8 +32,8 @@ namespace SistemaContable.Vistas
             string conexionDB = "";
             try
             {
-                conexionDB += "datasource=" + boxIP + ";port=" + boxPuerto + ";username=" + boxUsuario + ";password=" + boxContrasena + ";database=librodiario;";
-                controlador.setConexionDB(conexionDB);
+                conexionDB += "datasource=" + boxIP.Text + ";port=" + boxPuerto.Text + ";username=" + boxUsuario.Text + ";password=" + boxContrasena.Text + ";database=librodiario;";
+                SQLConexion.Conexion.setDatos(conexionDB);
                 MessageBox.Show("Ajustes guardados correctamente");
             }
             catch(Exception ex)
