@@ -32,9 +32,26 @@ namespace SistemaContable.Vistas
             string conexionDB = "";
             try
             {
-                conexionDB += "datasource=" + boxIP.Text + ";port=" + boxPuerto.Text + ";username=" + boxUsuario.Text + ";password=" + boxContrasena.Text + ";database=librodiario;";
+                conexionDB += "datasource=" + boxIP.Text + ";port=" + boxPuerto.Text + ";username=" + boxUsuario.Text + ";password=" + boxContrasena.Text + ";database=" + boxBaseDatos.Text + ";";
                 SQLConexion.Conexion.setDatos(conexionDB);
                 MessageBox.Show("Ajustes guardados correctamente");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void datosPrueba_Click(object sender, EventArgs e)
+        {
+            //Se utiliza el servicio de CleverCloud para proporcionar una Base de datos de prueba
+            try
+            {
+                boxIP.Text = "btozqiibvdqa9tmgpsz6-mysql.services.clever-cloud.com";
+                boxPuerto.Text = "3306";
+                boxUsuario.Text = "ud6ciidjbxolhwxg";
+                boxContrasena.Text = "SCpZw1nVttMq07Up4Km6";
+                boxBaseDatos.Text = "btozqiibvdqa9tmgpsz6";
             }
             catch(Exception ex)
             {
