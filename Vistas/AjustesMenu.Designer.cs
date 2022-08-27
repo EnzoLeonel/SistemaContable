@@ -39,11 +39,14 @@ namespace SistemaContable.Vistas
             this.label4 = new System.Windows.Forms.Label();
             this.boxUsuario = new System.Windows.Forms.TextBox();
             this.boxContrasena = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.boxBaseDatos = new System.Windows.Forms.TextBox();
+            this.datosPrueba = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // botonGuardar
             // 
-            this.botonGuardar.Location = new System.Drawing.Point(124, 148);
+            this.botonGuardar.Location = new System.Drawing.Point(124, 206);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(75, 23);
             this.botonGuardar.TabIndex = 0;
@@ -128,11 +131,43 @@ namespace SistemaContable.Vistas
             this.boxContrasena.TabIndex = 8;
             this.boxContrasena.UseSystemPasswordChar = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.LemonChiffon;
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(13, 139);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(117, 18);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Base de Datos:";
+            // 
+            // boxBaseDatos
+            // 
+            this.boxBaseDatos.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxBaseDatos.Location = new System.Drawing.Point(16, 160);
+            this.boxBaseDatos.Name = "boxBaseDatos";
+            this.boxBaseDatos.Size = new System.Drawing.Size(125, 24);
+            this.boxBaseDatos.TabIndex = 10;
+            // 
+            // datosPrueba
+            // 
+            this.datosPrueba.Location = new System.Drawing.Point(187, 160);
+            this.datosPrueba.Name = "datosPrueba";
+            this.datosPrueba.Size = new System.Drawing.Size(125, 23);
+            this.datosPrueba.TabIndex = 11;
+            this.datosPrueba.Text = "Usar Datos de Prueba";
+            this.datosPrueba.UseVisualStyleBackColor = true;
+            this.datosPrueba.Click += new System.EventHandler(this.datosPrueba_Click);
+            // 
             // AjustesMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 193);
+            this.ClientSize = new System.Drawing.Size(332, 241);
+            this.Controls.Add(this.datosPrueba);
+            this.Controls.Add(this.boxBaseDatos);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.boxContrasena);
             this.Controls.Add(this.boxUsuario);
             this.Controls.Add(this.label4);
@@ -163,5 +198,8 @@ namespace SistemaContable.Vistas
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox boxUsuario;
         private System.Windows.Forms.TextBox boxContrasena;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox boxBaseDatos;
+        private System.Windows.Forms.Button datosPrueba;
     }
 }

@@ -32,9 +32,26 @@ namespace SistemaContable.Vistas
             string conexionDB = "";
             try
             {
-                conexionDB += "datasource=" + boxIP.Text + ";port=" + boxPuerto.Text + ";username=" + boxUsuario.Text + ";password=" + boxContrasena.Text + ";database=librodiario;";
+                conexionDB += "datasource=" + boxIP.Text + ";port=" + boxPuerto.Text + ";username=" + boxUsuario.Text + ";password=" + boxContrasena.Text + ";database=" + boxBaseDatos.Text + ";";
                 SQLConexion.Conexion.setDatos(conexionDB);
                 MessageBox.Show("Ajustes guardados correctamente");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void datosPrueba_Click(object sender, EventArgs e)
+        {
+            //Se utiliza el servicio de CleverCloud para proporcionar una Base de datos de prueba
+            try
+            {
+                boxIP.Text = "IP/HOST DE LA BASE DE DATOS";
+                boxPuerto.Text = "PUERTO";
+                boxUsuario.Text = "USUARIO";
+                boxContrasena.Text = "CONTRASEÑA";
+                boxBaseDatos.Text = "NOMBRE DE LA BASE DE DATOS";
             }
             catch(Exception ex)
             {

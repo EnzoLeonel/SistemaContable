@@ -45,7 +45,7 @@ namespace SistemaContable
                 conectado = true;
                 databaseConnection.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("No se pudo conectar al servidor");
             }
