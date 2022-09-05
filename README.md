@@ -13,7 +13,9 @@ Normalmente, el programa no funcionará sin una base de datos. Para dar un vista
 en el menú principal, presiona el botón "Usar Datos de Prueba" y luego "Guardar". Ahora ya podrás utilizar el programa utilizando
 una base de datos pública. **Usar datos de prueba podría afectar considerablemente el rendimiento del programa**.
 
-**IMPORTANTE:** Al ser una base de datos pública, podría contener datos erróneos o encontrarse corrupta. Si quieres restaurar la base de datos, dirígete al siguiente link:
+**IMPORTANTE:** Al ser una base de datos pública, podría contener datos erróneos o encontrarse corrupta. Si quieres restaurar la base de datos, dirígete al siguiente link: https://restaurador-sistema-contable.onrender.com/
+
+Restaurador es una pequeña aplicación web que elimina todos los datos de la base de datos y vuelve a crear las tablas nuevamente. Si quieres saber más sobre su funcionamiento, puedes visitar el repositorio en mi perfil o visitar el siguiente link: https://github.com/EnzoLeonel/restaurador-sistema-contable
 
 # Vista Previa
 <br>
