@@ -9,9 +9,9 @@ El objetivo de este proyecto se basaba en desarrollar un software que utilizara 
 Para descargar el ejecutable, puedes dirigirte a la sección "Releases" del repositorio y descargar el ejecutable, o dirigirte al siguiente link:
 [SistemaContable.exe](https://github.com/EnzoLeonel/SistemaContable/releases/download/first/SistemaContable.exe)
 
-Normalmente, el programa no funcionará sin una base de datos. Para dar un vistazo al programa sin tener una base de datos, dirígete a la pestaña "Ajustes"
+Normalmente, el programa no funcionará sin una base de datos. Crear una puede llevar tiempo y ser molesto para el usuario, por lo que opté por utilizar el servicio de Clever Cloud para crear una base de datos pública de prueba. Para dar un vistazo al programa, dirígete a la pestaña "Ajustes"
 en el menú principal, presiona el botón "Usar Datos de Prueba" y luego "Guardar". Ahora ya podrás utilizar el programa utilizando
-una base de datos pública. **Usar datos de prueba podría afectar considerablemente el rendimiento del programa**.
+la base de datos pública de Clever Cloud. **Usar datos de prueba podría afectar considerablemente el rendimiento del programa**.
 
 **IMPORTANTE:** Al ser una base de datos pública, podría contener datos erróneos o encontrarse corrupta. Si quieres restaurar la base de datos, dirígete al siguiente link: https://restaurador-sistema-contable.onrender.com/
 
